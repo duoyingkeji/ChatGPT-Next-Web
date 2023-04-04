@@ -44,6 +44,7 @@ const es: LocaleType = {
   Home: {
     NewChat: "Nuevo chat",
     DeleteChat: "¿Confirmar eliminación de la conversación seleccionada?",
+    WebSite: "官网",
   },
   Settings: {
     Title: "Configuración",
