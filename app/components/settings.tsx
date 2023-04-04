@@ -199,83 +199,82 @@ export function Settings(props: { closeSettings: () => void }) {
             </Popover>
           </SettingItem>
 
-          <SettingItem
-            title={Locale.Settings.Update.Version(currentId)}
-            subTitle={
-              checkingUpdate
-                ? Locale.Settings.Update.IsChecking
-                : hasNewVersion
-                ? Locale.Settings.Update.FoundUpdate(remoteId ?? "ERROR")
-                : Locale.Settings.Update.IsLatest
-            }
-          >
-            {checkingUpdate ? (
-              <div />
-            ) : hasNewVersion ? (
-              <Link href={UPDATE_URL} target="_blank" className="link">
-                {Locale.Settings.Update.GoToUpdate}
-              </Link>
-            ) : (
-              <IconButton
-                icon={<ResetIcon></ResetIcon>}
-                text={Locale.Settings.Update.CheckUpdate}
-                onClick={() => checkUpdate(true)}
-              />
-            )}
-          </SettingItem>
+          {/*<SettingItem*/}
+          {/*  title={Locale.Settings.Update.Version(currentId)}*/}
+          {/*  subTitle={*/}
+          {/*    checkingUpdate*/}
+          {/*      ? Locale.Settings.Update.IsChecking*/}
+          {/*      : hasNewVersion*/}
+          {/*      ? Locale.Settings.Update.FoundUpdate(remoteId ?? "ERROR")*/}
+          {/*      : Locale.Settings.Update.IsLatest*/}
+          {/*  }>*/}
+          {/*  {checkingUpdate ? (*/}
+          {/*    <div />*/}
+          {/*  ) : hasNewVersion ? (*/}
+          {/*    <Link href={UPDATE_URL} target="_blank" className="link">*/}
+          {/*      {Locale.Settings.Update.GoToUpdate}*/}
+          {/*    </Link>*/}
+          {/*  ) : (*/}
+          {/*    <IconButton*/}
+          {/*      icon={<ResetIcon></ResetIcon>}*/}
+          {/*      text={Locale.Settings.Update.CheckUpdate}*/}
+          {/*      onClick={() => checkUpdate(true)}*/}
+          {/*    />*/}
+          {/*  )}*/}
+          {/*</SettingItem>*/}
 
-          <SettingItem title={Locale.Settings.SendKey}>
-            <select
-              value={config.submitKey}
-              onChange={(e) => {
-                updateConfig(
-                  (config) =>
-                    (config.submitKey = e.target.value as any as SubmitKey),
-                );
-              }}
-            >
-              {Object.values(SubmitKey).map((v) => (
-                <option value={v} key={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </SettingItem>
+          {/*<SettingItem title={Locale.Settings.SendKey}>*/}
+          {/*  <select*/}
+          {/*    value={config.submitKey}*/}
+          {/*    onChange={(e) => {*/}
+          {/*      updateConfig(*/}
+          {/*        (config) =>*/}
+          {/*          (config.submitKey = e.target.value as any as SubmitKey),*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {Object.values(SubmitKey).map((v) => (*/}
+          {/*      <option value={v} key={v}>*/}
+          {/*        {v}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</SettingItem>*/}
 
-          <ListItem>
-            <div className={styles["settings-title"]}>
-              {Locale.Settings.Theme}
-            </div>
-            <select
-              value={config.theme}
-              onChange={(e) => {
-                updateConfig(
-                  (config) => (config.theme = e.target.value as any as Theme),
-                );
-              }}
-            >
-              {Object.values(Theme).map((v) => (
-                <option value={v} key={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </ListItem>
+          {/*<ListItem>*/}
+          {/*  <div className={styles["settings-title"]}>*/}
+          {/*    {Locale.Settings.Theme}*/}
+          {/*  </div>*/}
+          {/*  <select*/}
+          {/*    value={config.theme}*/}
+          {/*    onChange={(e) => {*/}
+          {/*      updateConfig(*/}
+          {/*        (config) => (config.theme = e.target.value as any as Theme),*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {Object.values(Theme).map((v) => (*/}
+          {/*      <option value={v} key={v}>*/}
+          {/*        {v}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</ListItem>*/}
 
-          <SettingItem title={Locale.Settings.Lang.Name}>
-            <select
-              value={getLang()}
-              onChange={(e) => {
-                changeLang(e.target.value as any);
-              }}
-            >
-              {AllLangs.map((lang) => (
-                <option value={lang} key={lang}>
-                  {Locale.Settings.Lang.Options[lang]}
-                </option>
-              ))}
-            </select>
-          </SettingItem>
+          {/*<SettingItem title={Locale.Settings.Lang.Name}>*/}
+          {/*  <select*/}
+          {/*    value={getLang()}*/}
+          {/*    onChange={(e) => {*/}
+          {/*      changeLang(e.target.value as any);*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {AllLangs.map((lang) => (*/}
+          {/*      <option value={lang} key={lang}>*/}
+          {/*        {Locale.Settings.Lang.Options[lang]}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</SettingItem>*/}
 
           <SettingItem
             title={Locale.Settings.FontSize.Title}
@@ -297,239 +296,239 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
 
-          <SettingItem title={Locale.Settings.TightBorder}>
-            <input
-              type="checkbox"
-              checked={config.tightBorder}
-              onChange={(e) =>
-                updateConfig(
-                  (config) => (config.tightBorder = e.currentTarget.checked),
-                )
-              }
-            ></input>
-          </SettingItem>
+          {/*<SettingItem title={Locale.Settings.TightBorder}>*/}
+          {/*  <input*/}
+          {/*    type="checkbox"*/}
+          {/*    checked={config.tightBorder}*/}
+          {/*    onChange={(e) =>*/}
+          {/*      updateConfig(*/}
+          {/*        (config) => (config.tightBorder = e.currentTarget.checked),*/}
+          {/*      )*/}
+          {/*    }*/}
+          {/*  ></input>*/}
+          {/*</SettingItem>*/}
 
-          <SettingItem title={Locale.Settings.SendPreviewBubble}>
-            <input
-              type="checkbox"
-              checked={config.sendPreviewBubble}
-              onChange={(e) =>
-                updateConfig(
-                  (config) =>
-                    (config.sendPreviewBubble = e.currentTarget.checked),
-                )
-              }
-            ></input>
-          </SettingItem>
-        </List>
-        <List>
-          <SettingItem
-            title={Locale.Settings.Prompt.Disable.Title}
-            subTitle={Locale.Settings.Prompt.Disable.SubTitle}
-          >
-            <input
-              type="checkbox"
-              checked={config.disablePromptHint}
-              onChange={(e) =>
-                updateConfig(
-                  (config) =>
-                    (config.disablePromptHint = e.currentTarget.checked),
-                )
-              }
-            ></input>
-          </SettingItem>
-
-          <SettingItem
-            title={Locale.Settings.Prompt.List}
-            subTitle={Locale.Settings.Prompt.ListCount(
-              builtinCount,
-              customCount,
-            )}
-          >
-            <IconButton
-              icon={<EditIcon />}
-              text={Locale.Settings.Prompt.Edit}
-              onClick={() => showToast(Locale.WIP)}
-            />
-          </SettingItem>
-        </List>
-        <List>
-          {enabledAccessControl ? (
-            <SettingItem
-              title={Locale.Settings.AccessCode.Title}
-              subTitle={Locale.Settings.AccessCode.SubTitle}
-            >
-              <PasswordInput
-                value={accessStore.accessCode}
-                type="text"
-                placeholder={Locale.Settings.AccessCode.Placeholder}
-                onChange={(e) => {
-                  accessStore.updateCode(e.currentTarget.value);
-                }}
-              />
-            </SettingItem>
-          ) : (
-            <></>
-          )}
-
-          <SettingItem
-            title={Locale.Settings.Token.Title}
-            subTitle={Locale.Settings.Token.SubTitle}
-          >
-            <PasswordInput
-              value={accessStore.token}
-              type="text"
-              placeholder={Locale.Settings.Token.Placeholder}
-              onChange={(e) => {
-                accessStore.updateToken(e.currentTarget.value);
-              }}
-            />
-          </SettingItem>
-
-          <SettingItem
-            title={Locale.Settings.Usage.Title}
-            subTitle={
-              showUsage
-                ? loadingUsage
-                  ? Locale.Settings.Usage.IsChecking
-                  : Locale.Settings.Usage.SubTitle(usage?.used ?? "[?]")
-                : Locale.Settings.Usage.NoAccess
-            }
-          >
-            {!showUsage || loadingUsage ? (
-              <div />
-            ) : (
-              <IconButton
-                icon={<ResetIcon></ResetIcon>}
-                text={Locale.Settings.Usage.Check}
-                onClick={checkUsage}
-              />
-            )}
-          </SettingItem>
-
-          <SettingItem
-            title={Locale.Settings.HistoryCount.Title}
-            subTitle={Locale.Settings.HistoryCount.SubTitle}
-          >
-            <input
-              type="range"
-              title={config.historyMessageCount.toString()}
-              value={config.historyMessageCount}
-              min="0"
-              max="25"
-              step="2"
-              onChange={(e) =>
-                updateConfig(
-                  (config) =>
-                    (config.historyMessageCount = e.target.valueAsNumber),
-                )
-              }
-            ></input>
-          </SettingItem>
-
-          <SettingItem
-            title={Locale.Settings.CompressThreshold.Title}
-            subTitle={Locale.Settings.CompressThreshold.SubTitle}
-          >
-            <input
-              type="number"
-              min={500}
-              max={4000}
-              value={config.compressMessageLengthThreshold}
-              onChange={(e) =>
-                updateConfig(
-                  (config) =>
-                    (config.compressMessageLengthThreshold =
-                      e.currentTarget.valueAsNumber),
-                )
-              }
-            ></input>
-          </SettingItem>
+          {/*<SettingItem title={Locale.Settings.SendPreviewBubble}>*/}
+          {/*  <input*/}
+          {/*    type="checkbox"*/}
+          {/*    checked={config.sendPreviewBubble}*/}
+          {/*    onChange={(e) =>*/}
+          {/*      updateConfig(*/}
+          {/*        (config) =>*/}
+          {/*          (config.sendPreviewBubble = e.currentTarget.checked),*/}
+          {/*      )*/}
+          {/*    }*/}
+          {/*  ></input>*/}
+          {/*</SettingItem>*/}
         </List>
 
-        <List>
-          <SettingItem title={Locale.Settings.Model}>
-            <select
-              value={config.modelConfig.model}
-              onChange={(e) => {
-                updateConfig(
-                  (config) =>
-                    (config.modelConfig.model = ModalConfigValidator.model(
-                      e.currentTarget.value,
-                    )),
-                );
-              }}
-            >
-              {ALL_MODELS.map((v) => (
-                <option value={v.name} key={v.name} disabled={!v.available}>
-                  {v.name}
-                </option>
-              ))}
-            </select>
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.Temperature.Title}
-            subTitle={Locale.Settings.Temperature.SubTitle}
-          >
-            <input
-              type="range"
-              value={config.modelConfig.temperature?.toFixed(1)}
-              min="0"
-              max="2"
-              step="0.1"
-              onChange={(e) => {
-                updateConfig(
-                  (config) =>
-                    (config.modelConfig.temperature =
-                      ModalConfigValidator.temperature(
-                        e.currentTarget.valueAsNumber,
-                      )),
-                );
-              }}
-            ></input>
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.MaxTokens.Title}
-            subTitle={Locale.Settings.MaxTokens.SubTitle}
-          >
-            <input
-              type="number"
-              min={100}
-              max={32000}
-              value={config.modelConfig.max_tokens}
-              onChange={(e) =>
-                updateConfig(
-                  (config) =>
-                    (config.modelConfig.max_tokens =
-                      ModalConfigValidator.max_tokens(
-                        e.currentTarget.valueAsNumber,
-                      )),
-                )
-              }
-            ></input>
-          </SettingItem>
-          <SettingItem
-            title={Locale.Settings.PresencePenlty.Title}
-            subTitle={Locale.Settings.PresencePenlty.SubTitle}
-          >
-            <input
-              type="range"
-              value={config.modelConfig.presence_penalty?.toFixed(1)}
-              min="-2"
-              max="2"
-              step="0.5"
-              onChange={(e) => {
-                updateConfig(
-                  (config) =>
-                    (config.modelConfig.presence_penalty =
-                      ModalConfigValidator.presence_penalty(
-                        e.currentTarget.valueAsNumber,
-                      )),
-                );
-              }}
-            ></input>
-          </SettingItem>
-        </List>
+        {/*<List>*/}
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.Prompt.Disable.Title}*/}
+        {/*    subTitle={Locale.Settings.Prompt.Disable.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="checkbox"*/}
+        {/*      checked={config.disablePromptHint}*/}
+        {/*      onChange={(e) =>*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.disablePromptHint = e.currentTarget.checked),*/}
+        {/*        )*/}
+        {/*      }*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.Prompt.List}*/}
+        {/*    subTitle={Locale.Settings.Prompt.ListCount(*/}
+        {/*      builtinCount,*/}
+        {/*      customCount,*/}
+        {/*    )}*/}
+        {/*  >*/}
+        {/*    <IconButton*/}
+        {/*      icon={<EditIcon />}*/}
+        {/*      text={Locale.Settings.Prompt.Edit}*/}
+        {/*      onClick={() => showToast(Locale.WIP)}*/}
+        {/*    />*/}
+        {/*  </SettingItem>*/}
+        {/*</List>*/}
+        {/*<List>*/}
+        {/*  {enabledAccessControl ? (*/}
+        {/*    <SettingItem*/}
+        {/*      title={Locale.Settings.AccessCode.Title}*/}
+        {/*      subTitle={Locale.Settings.AccessCode.SubTitle}*/}
+        {/*    >*/}
+        {/*      <PasswordInput*/}
+        {/*        value={accessStore.accessCode}*/}
+        {/*        type="text"*/}
+        {/*        placeholder={Locale.Settings.AccessCode.Placeholder}*/}
+        {/*        onChange={(e) => {*/}
+        {/*          accessStore.updateCode(e.currentTarget.value);*/}
+        {/*        }}*/}
+        {/*      />*/}
+        {/*    </SettingItem>*/}
+        {/*  ) : (*/}
+        {/*    <></>*/}
+        {/*  )}*/}
+
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.Token.Title}*/}
+        {/*    subTitle={Locale.Settings.Token.SubTitle}*/}
+        {/*  >*/}
+        {/*    <PasswordInput*/}
+        {/*      value={accessStore.token}*/}
+        {/*      type="text"*/}
+        {/*      placeholder={Locale.Settings.Token.Placeholder}*/}
+        {/*      onChange={(e) => {*/}
+        {/*        accessStore.updateToken(e.currentTarget.value);*/}
+        {/*      }}*/}
+        {/*    />*/}
+        {/*  </SettingItem>*/}
+
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.Usage.Title}*/}
+        {/*    subTitle={*/}
+        {/*      showUsage*/}
+        {/*        ? loadingUsage*/}
+        {/*          ? Locale.Settings.Usage.IsChecking*/}
+        {/*          : Locale.Settings.Usage.SubTitle(usage?.used ?? "[?]")*/}
+        {/*        : Locale.Settings.Usage.NoAccess*/}
+        {/*    }*/}
+        {/*  >*/}
+        {/*    {!showUsage || loadingUsage ? (*/}
+        {/*      <div />*/}
+        {/*    ) : (*/}
+        {/*      <IconButton*/}
+        {/*        icon={<ResetIcon></ResetIcon>}*/}
+        {/*        text={Locale.Settings.Usage.Check}*/}
+        {/*        onClick={checkUsage}*/}
+        {/*      />*/}
+        {/*    )}*/}
+        {/*  </SettingItem>*/}
+
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.HistoryCount.Title}*/}
+        {/*    subTitle={Locale.Settings.HistoryCount.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="range"*/}
+        {/*      title={config.historyMessageCount.toString()}*/}
+        {/*      value={config.historyMessageCount}*/}
+        {/*      min="0"*/}
+        {/*      max="25"*/}
+        {/*      step="2"*/}
+        {/*      onChange={(e) =>*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.historyMessageCount = e.target.valueAsNumber),*/}
+        {/*        )*/}
+        {/*      }*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.CompressThreshold.Title}*/}
+        {/*    subTitle={Locale.Settings.CompressThreshold.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="number"*/}
+        {/*      min={500}*/}
+        {/*      max={4000}*/}
+        {/*      value={config.compressMessageLengthThreshold}*/}
+        {/*      onChange={(e) =>*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.compressMessageLengthThreshold =*/}
+        {/*              e.currentTarget.valueAsNumber),*/}
+        {/*        )*/}
+        {/*      }*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+        {/*</List>*/}
+        {/*<List>*/}
+        {/*  <SettingItem title={Locale.Settings.Model}>*/}
+        {/*    <select*/}
+        {/*      value={config.modelConfig.model}*/}
+        {/*      onChange={(e) => {*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.modelConfig.model = ModalConfigValidator.model(*/}
+        {/*              e.currentTarget.value,*/}
+        {/*            )),*/}
+        {/*        );*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      {ALL_MODELS.map((v) => (*/}
+        {/*        <option value={v.name} key={v.name} disabled={!v.available}>*/}
+        {/*          {v.name}*/}
+        {/*        </option>*/}
+        {/*      ))}*/}
+        {/*    </select>*/}
+        {/*  </SettingItem>*/}
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.Temperature.Title}*/}
+        {/*    subTitle={Locale.Settings.Temperature.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="range"*/}
+        {/*      value={config.modelConfig.temperature?.toFixed(1)}*/}
+        {/*      min="0"*/}
+        {/*      max="2"*/}
+        {/*      step="0.1"*/}
+        {/*      onChange={(e) => {*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.modelConfig.temperature =*/}
+        {/*              ModalConfigValidator.temperature(*/}
+        {/*                e.currentTarget.valueAsNumber,*/}
+        {/*              )),*/}
+        {/*        );*/}
+        {/*      }}*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.MaxTokens.Title}*/}
+        {/*    subTitle={Locale.Settings.MaxTokens.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="number"*/}
+        {/*      min={100}*/}
+        {/*      max={32000}*/}
+        {/*      value={config.modelConfig.max_tokens}*/}
+        {/*      onChange={(e) =>*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.modelConfig.max_tokens =*/}
+        {/*              ModalConfigValidator.max_tokens(*/}
+        {/*                e.currentTarget.valueAsNumber,*/}
+        {/*              )),*/}
+        {/*        )*/}
+        {/*      }*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+        {/*  <SettingItem*/}
+        {/*    title={Locale.Settings.PresencePenlty.Title}*/}
+        {/*    subTitle={Locale.Settings.PresencePenlty.SubTitle}*/}
+        {/*  >*/}
+        {/*    <input*/}
+        {/*      type="range"*/}
+        {/*      value={config.modelConfig.presence_penalty?.toFixed(1)}*/}
+        {/*      min="-2"*/}
+        {/*      max="2"*/}
+        {/*      step="0.5"*/}
+        {/*      onChange={(e) => {*/}
+        {/*        updateConfig(*/}
+        {/*          (config) =>*/}
+        {/*            (config.modelConfig.presence_penalty =*/}
+        {/*              ModalConfigValidator.presence_penalty(*/}
+        {/*                e.currentTarget.valueAsNumber,*/}
+        {/*              )),*/}
+        {/*        );*/}
+        {/*      }}*/}
+        {/*    ></input>*/}
+        {/*  </SettingItem>*/}
+        {/*</List>*/}
       </div>
     </ErrorBoundary>
   );

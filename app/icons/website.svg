@@ -7,6 +7,10 @@
 	.st1{clip-path:url(#SVGID_2_);fill:url(#SVGID_3_);}
 	.st2{clip-path:url(#SVGID_5_);fill:url(#SVGID_6_);}
 </style>
+
+<defs>
+    <rect id="path_0" x="0" y="0" width="43" height="43.580135196270106" />
+</defs>
 <g class="st0">
 	<g>
 		<defs>

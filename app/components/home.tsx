@@ -9,12 +9,13 @@ import styles from "./home.module.scss";
 
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/chatgpt.svg";
+import SoSoIcon from "../icons/soso.svg";
 
 import BotIcon from "../icons/bot.svg";
 import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import CloseIcon from "../icons/close.svg";
+import WebSiteIcon from "../icons/website.svg";
 
 import { useChatStore } from "../store";
 import { isMobileScreen } from "../utils";
@@ -23,7 +24,7 @@ import { ChatList } from "./chat-list";
 import { Chat } from "./chat";
 
 import dynamic from "next/dynamic";
-import { REPO_URL } from "../constant";
+import {REPO_URL, WECHAT_WB_URL} from "../constant";
 import { ErrorBoundary } from "./error";
 
 export function Loading(props: { noLogo?: boolean }) {
@@ -105,10 +106,10 @@ function _Home() {
         <div className={styles["sidebar-header"]}>
           <div className={styles["sidebar-title"]}>嗖嗖AI助手</div>
           <div className={styles["sidebar-sub-title"]}>
-
+              立刻开始！
           </div>
           <div className={styles["sidebar-logo"]}>
-            <ChatGptIcon />
+            <SoSoIcon />
           </div>
         </div>
 
@@ -123,7 +124,16 @@ function _Home() {
         </div>
 
         <div className={styles["sidebar-tail"]}>
-          {/*<div className={styles["sidebar-actions"]}>*/}
+
+          <div className={styles["sidebar-action"]}>
+            <IconButton icon={<SettingsIcon />} onClick={() => {setOpenSettings(true);setShowSideBar(false);}} shadow/>
+          </div>
+          <div>
+            <IconButton icon={<AddIcon />} text={Locale.Home.NewChat} onClick={() => {createNewSession();setShowSideBar(false);}} shadow/>
+          </div>
+
+          <div className={styles["sidebar-actions"]}>
+
             {/*<div className={styles["sidebar-action"] + " " + styles.mobile}>*/}
             {/*  <IconButton*/}
             {/*    icon={<CloseIcon />}*/}
@@ -135,35 +145,16 @@ function _Home() {
             {/*  />*/}
             {/*</div>*/}
 
-            {/*<div className={styles["sidebar-action"]}>*/}
-            {/*  <IconButton*/}
-            {/*    icon={<SettingsIcon />}*/}
-            {/*    onClick={() => {*/}
-            {/*      setOpenSettings(true);*/}
-            {/*      setShowSideBar(false);*/}
-            {/*    }}*/}
-            {/*    shadow*/}
-            {/*  />*/}
-            {/*</div>*/}
 
-            {/*<div className={styles["sidebar-action"]}>*/}
-            {/*  <a href={REPO_URL} target="_blank">*/}
-            {/*    <IconButton icon={<GithubIcon />} shadow />*/}
-            {/*  </a>*/}
-            {/*</div>*/}
 
-          {/*</div>*/}
-          <div>
-            <IconButton
-              icon={<AddIcon />}
-              text={Locale.Home.NewChat}
-              onClick={() => {
-                createNewSession();
-                setShowSideBar(false);
-              }}
-              shadow
-            />
+            <div className={styles["sidebar-action"]}>
+              <a href={WECHAT_WB_URL} style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'inherit', fontSize: 'inherit' }} target="_blank">
+                <IconButton icon={<WebSiteIcon />} text={Locale.Home.WebSite} shadow/>
+              </a>
+            </div>
           </div>
+
+
         </div>
       </div>
 

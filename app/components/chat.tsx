@@ -120,18 +120,19 @@ function PromptToast(props: {
 
   return (
     <div className={chatStyle["prompt-toast"]} key="prompt-toast">
-      {props.showToast && (
-        <div
-          className={chatStyle["prompt-toast-inner"] + " clickable"}
-          role="button"
-          onClick={() => props.setShowModal(true)}
-        >
-          <BrainIcon />
-          <span className={chatStyle["prompt-toast-content"]}>
-            {Locale.Context.Toast(context.length)}
-          </span>
-        </div>
-      )}
+      {/*{props.showToast && (*/}
+      {/*  <div*/}
+      {/*    className={chatStyle["prompt-toast-inner"] + " clickable"}*/}
+      {/*    role="button"*/}
+      {/*    onClick={() => props.setShowModal(true)}*/}
+      {/*  >*/}
+      {/*    <BrainIcon />*/}
+      {/*    <span className={chatStyle["prompt-toast-content"]}>*/}
+      {/*      {Locale.Context.Toast(context.length)}*/}
+      {/*    </span>*/}
+
+      {/*  </div>*/}
+      {/*)}*/}
       {props.showModal && (
         <div className="modal-mask">
           <Modal
@@ -492,29 +493,32 @@ export function Chat(props: {
               onClick={props?.showSideBar}
             />
           </div>
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<BrainIcon />}
-              bordered
-              title={Locale.Chat.Actions.CompressedHistory}
-              onClick={() => {
-                setShowPromptModal(true);
-              }}
-            />
-          </div>
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<ExportIcon />}
-              bordered
-              title={Locale.Chat.Actions.Export}
-              onClick={() => {
-                exportMessages(
-                  session.messages.filter((msg) => !msg.isError),
-                  session.topic,
-                );
-              }}
-            />
-          </div>
+
+          {/*<div className={styles["window-action-button"]}>*/}
+          {/*  <IconButton*/}
+          {/*    icon={<BrainIcon />}*/}
+          {/*    bordered*/}
+          {/*    title={Locale.Chat.Actions.CompressedHistory}*/}
+          {/*    onClick={() => {*/}
+          {/*      setShowPromptModal(true);*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*</div>*/}
+
+          {/*<div className={styles["window-action-button"]}>*/}
+          {/*  <IconButton*/}
+          {/*    icon={<ExportIcon />}*/}
+          {/*    bordered*/}
+          {/*    title={Locale.Chat.Actions.Export}*/}
+          {/*    onClick={() => {*/}
+          {/*      exportMessages(*/}
+          {/*        session.messages.filter((msg) => !msg.isError),*/}
+          {/*        session.topic,*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*</div>*/}
+
         </div>
 
         <PromptToast

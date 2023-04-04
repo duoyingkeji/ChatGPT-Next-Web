@@ -1,6 +1,7 @@
 import { SubmitKey } from "../store/app";
 import type { LocaleType } from "./index";
 
+// @ts-ignore
 const en: LocaleType = {
   WIP: "WIP...",
   Error: {
