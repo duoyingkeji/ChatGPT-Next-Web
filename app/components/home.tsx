@@ -123,33 +123,36 @@ function _Home() {
         </div>
 
         <div className={styles["sidebar-tail"]}>
-          <div className={styles["sidebar-actions"]}>
-            <div className={styles["sidebar-action"] + " " + styles.mobile}>
-              <IconButton
-                icon={<CloseIcon />}
-                onClick={() => {
-                  if (confirm(Locale.Home.DeleteChat)) {
-                    removeSession(currentIndex);
-                  }
-                }}
-              />
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <IconButton
-                icon={<SettingsIcon />}
-                onClick={() => {
-                  setOpenSettings(true);
-                  setShowSideBar(false);
-                }}
-                shadow
-              />
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank">
-                <IconButton icon={<GithubIcon />} shadow />
-              </a>
-            </div>
-          </div>
+          {/*<div className={styles["sidebar-actions"]}>*/}
+            {/*<div className={styles["sidebar-action"] + " " + styles.mobile}>*/}
+            {/*  <IconButton*/}
+            {/*    icon={<CloseIcon />}*/}
+            {/*    onClick={() => {*/}
+            {/*      if (confirm(Locale.Home.DeleteChat)) {*/}
+            {/*        removeSession(currentIndex);*/}
+            {/*      }*/}
+            {/*    }}*/}
+            {/*  />*/}
+            {/*</div>*/}
+
+            {/*<div className={styles["sidebar-action"]}>*/}
+            {/*  <IconButton*/}
+            {/*    icon={<SettingsIcon />}*/}
+            {/*    onClick={() => {*/}
+            {/*      setOpenSettings(true);*/}
+            {/*      setShowSideBar(false);*/}
+            {/*    }}*/}
+            {/*    shadow*/}
+            {/*  />*/}
+            {/*</div>*/}
+
+            {/*<div className={styles["sidebar-action"]}>*/}
+            {/*  <a href={REPO_URL} target="_blank">*/}
+            {/*    <IconButton icon={<GithubIcon />} shadow />*/}
+            {/*  </a>*/}
+            {/*</div>*/}
+
+          {/*</div>*/}
           <div>
             <IconButton
               icon={<AddIcon />}
