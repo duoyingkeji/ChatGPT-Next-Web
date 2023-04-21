@@ -1,6 +1,6 @@
 export const OWNER = "duoyingkeji";
 export const REPO = "ChatGPT-Next-Web";
-export const WECHAT_WB_URL = "https://www.sososn.cn/";
+export const WECHAT_WB_URL = "https://mp.weixin.qq.com/s/X52oDTteG9hkEZJMNk8BVA";
 export const REPO_URL = `https://github.com/${OWNER}/${REPO}`;
 export const ISSUE_URL = `https://github.com/${OWNER}/${REPO}/issues`;
 export const UPDATE_URL = `${REPO_URL}#%E4%BF%9D%E6%8C%81%E6%9B%B4%E6%96%B0-keep-updated`;

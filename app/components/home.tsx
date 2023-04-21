@@ -16,6 +16,7 @@ import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import CloseIcon from "../icons/close.svg";
 import WebSiteIcon from "../icons/website.svg";
+import HomeIcon from "../icons/home.svg";
 
 import { useChatStore } from "../store";
 import { isMobileScreen } from "../utils";
@@ -143,13 +144,13 @@ function _Home() {
             {/*      }*/}
             {/*    }}*/}
             {/*  />*/}
-            {/*</div>*/}
+            {/*</div>*/}11
 
 
 
             <div className={styles["sidebar-action"]}>
               <a href={WECHAT_WB_URL} style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'inherit', fontSize: 'inherit' }} target="_blank">
-                <IconButton icon={<WebSiteIcon />} text={Locale.Home.WebSite} shadow/>
+                <IconButton icon={<HomeIcon />} text={Locale.Home.WebSite} shadow/>
               </a>
             </div>
           </div>
