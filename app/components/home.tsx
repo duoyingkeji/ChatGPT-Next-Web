@@ -105,7 +105,7 @@ function _Home() {
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
         <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>嗖嗖AI助手</div>
+          <div className={styles["sidebar-title"]}>AI助手</div>
           <div className={styles["sidebar-sub-title"]}>
               立刻开始！
           </div>
