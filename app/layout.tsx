@@ -17,10 +17,10 @@ try {
 }
 
 export const metadata = {
-  title: "智盈AI助手",
+  title: "多盈AI助手",
   description: "DYSK Chat Bot.",
   appleWebApp: {
-    title: "智盈AI助手",
+    title: "多盈AI助手",
     statusBarStyle: "black-translucent",
   },
   themeColor: "#fafafa",
