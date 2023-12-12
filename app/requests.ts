@@ -22,7 +22,7 @@ const makeRequestParam = (
   }
 
   return {
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-16k-0613",
     messages: sendMessages,
     stream: options?.stream,
   };
