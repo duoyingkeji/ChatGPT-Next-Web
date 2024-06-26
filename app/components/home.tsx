@@ -4,33 +4,36 @@ require("../polyfill");
 
 import { useState, useEffect } from "react";
 
-import { IconButton } from "./button";
 import styles from "./home.module.scss";
 
-import SettingsIcon from "../icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
-import SoSoIcon from "../icons/soso.svg";
-
 import BotIcon from "../icons/bot.svg";
-import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import CloseIcon from "../icons/close.svg";
-import WebSiteIcon from "../icons/website.svg";
-import HomeIcon from "../icons/home.svg";
 
-import { useChatStore } from "../store";
-import { isMobileScreen } from "../utils";
-import Locale from "../locales";
-import { ChatList } from "./chat-list";
-import { Chat } from "./chat";
+import { getCSSVar, useMobileScreen } from "../utils";
 
 import dynamic from "next/dynamic";
-import {REPO_URL, WECHAT_WB_URL} from "../constant";
+import { ModelProvider, Path, SlotID } from "../constant";
 import { ErrorBoundary } from "./error";
+
+import { getISOLang, getLang } from "../locales";
+
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { SideBar } from "./sidebar";
+import { useAppConfig } from "../store/config";
+import { AuthPage } from "./auth";
+import { getClientConfig } from "../config/client";
+import { ClientApi } from "../client/api";
+import { useAccessStore } from "../store";
+import { identifyDefaultClaudeModel } from "../utils/checkers";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
-    <div className={styles["loading-content"]}>
+    <div className={styles["loading-content"] + " no-dark"}>
       {!props.noLogo && <BotIcon />}
       <LoadingIcon />
     </div>
@@ -41,8 +44,20 @@ const Settings = dynamic(async () => (await import("./settings")).Settings, {
   loading: () => <Loading noLogo />,
 });
 
-function useSwitchTheme() {
-  const config = useChatStore((state) => state.config);
+const Chat = dynamic(async () => (await import("./chat")).Chat, {
+  loading: () => <Loading noLogo />,
+});
+
+const NewChat = dynamic(async () => (await import("./new-chat")).NewChat, {
+  loading: () => <Loading noLogo />,
+});
+
+const MaskPage = dynamic(async () => (await import("./mask")).MaskPage, {
+  loading: () => <Loading noLogo />,
+});
+
+export function useSwitchTheme() {
+  const config = useAppConfig();
 
   useEffect(() => {
     document.body.classList.remove("light");
@@ -54,12 +69,33 @@ function useSwitchTheme() {
       document.body.classList.add("light");
     }
 
-    const themeColor = getComputedStyle(document.body)
-      .getPropertyValue("--theme-color")
-      .trim();
-    const metaDescription = document.querySelector('meta[name="theme-color"]');
-    metaDescription?.setAttribute("content", themeColor);
+    const metaDescriptionDark = document.querySelector(
+      'meta[name="theme-color"][media*="dark"]',
+    );
+    const metaDescriptionLight = document.querySelector(
+      'meta[name="theme-color"][media*="light"]',
+    );
+
+    if (config.theme === "auto") {
+      metaDescriptionDark?.setAttribute("content", "#151515");
+      metaDescriptionLight?.setAttribute("content", "#fafafa");
+    } else {
+      const themeColor = getCSSVar("--theme-color");
+      metaDescriptionDark?.setAttribute("content", themeColor);
+      metaDescriptionLight?.setAttribute("content", themeColor);
+    }
   }, [config.theme]);
+}
+
+function useHtmlLang() {
+  useEffect(() => {
+    const lang = getISOLang();
+    const htmlLang = document.documentElement.lang;
+
+    if (lang !== htmlLang) {
+      document.documentElement.lang = lang;
+    }
+  }, []);
 }
 
 const useHasHydrated = () => {
@@ -72,117 +108,105 @@ const useHasHydrated = () => {
   return hasHydrated;
 };
 
-function _Home() {
-  const [createNewSession, currentIndex, removeSession] = useChatStore(
-    (state) => [
-      state.newSession,
-      state.currentSessionIndex,
-      state.removeSession,
-    ],
-  );
-  const loading = !useHasHydrated();
-  const [showSideBar, setShowSideBar] = useState(true);
+const loadAsyncGoogleFont = () => {
+  const linkEl = document.createElement("link");
+  const proxyFontUrl = "/google-fonts";
+  const remoteFontUrl = "https://fonts.googleapis.com";
+  const googleFontUrl =
+    getClientConfig()?.buildMode === "export" ? remoteFontUrl : proxyFontUrl;
+  linkEl.rel = "stylesheet";
+  linkEl.href =
+    googleFontUrl +
+    "/css2?family=" +
+    encodeURIComponent("Noto Sans:wght@300;400;700;900") +
+    "&display=swap";
+  document.head.appendChild(linkEl);
+};
 
-  // setting
-  const [openSettings, setOpenSettings] = useState(false);
-  const config = useChatStore((state) => state.config);
+function Screen() {
+  const config = useAppConfig();
+  const location = useLocation();
+  const isHome = location.pathname === Path.Home;
+  const isAuth = location.pathname === Path.Auth;
+  const isMobileScreen = useMobileScreen();
+  const shouldTightBorder =
+    getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
 
-  useSwitchTheme();
-
-  if (loading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    loadAsyncGoogleFont();
+  }, []);
 
   return (
     <div
-      className={`${
-        config.tightBorder && !isMobileScreen()
-          ? styles["tight-container"]
-          : styles.container
-      }`}
+      className={
+        styles.container +
+        ` ${shouldTightBorder ? styles["tight-container"] : styles.container} ${
+          getLang() === "ar" ? styles["rtl-screen"] : ""
+        }`
+      }
     >
-      <div
-        className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
-      >
-        <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>多盈AI助手</div>
-          <div className={styles["sidebar-sub-title"]}>
-              立刻开始！
+      {isAuth ? (
+        <>
+          <AuthPage />
+        </>
+      ) : (
+        <>
+          <SideBar className={isHome ? styles["sidebar-show"] : ""} />
+
+          <div className={styles["window-content"]} id={SlotID.AppBody}>
+            <Routes>
+              <Route path={Path.Home} element={<Chat />} />
+              <Route path={Path.NewChat} element={<NewChat />} />
+              <Route path={Path.Masks} element={<MaskPage />} />
+              <Route path={Path.Chat} element={<Chat />} />
+              <Route path={Path.Settings} element={<Settings />} />
+            </Routes>
           </div>
-          <div className={styles["sidebar-logo"]}>
-            <SoSoIcon />
-          </div>
-        </div>
-
-        <div
-          className={styles["sidebar-body"]}
-          onClick={() => {
-            setOpenSettings(false);
-            setShowSideBar(false);
-          }}
-        >
-          <ChatList />
-        </div>
-
-        <div className={styles["sidebar-tail"]}>
-
-          <div className={styles["sidebar-action"]}>
-            <IconButton icon={<SettingsIcon />} onClick={() => {setOpenSettings(true);setShowSideBar(false);}} shadow/>
-          </div>
-          <div>
-            <IconButton icon={<AddIcon />} text={Locale.Home.NewChat} onClick={() => {createNewSession();setShowSideBar(false);}} shadow/>
-          </div>
-
-          {/* <div className={styles["sidebar-actions"]}> */}
-
-            {/*<div className={styles["sidebar-action"] + " " + styles.mobile}>*/}
-            {/*  <IconButton*/}
-            {/*    icon={<CloseIcon />}*/}
-            {/*    onClick={() => {*/}
-            {/*      if (confirm(Locale.Home.DeleteChat)) {*/}
-            {/*        removeSession(currentIndex);*/}
-            {/*      }*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-
-
-
-            {/* <div className={styles["sidebar-action"]}> */}
-              {/* <a href={WECHAT_WB_URL} style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'inherit', fontSize: 'inherit' }} target="_blank"> */}
-                {/* <IconButton icon={<HomeIcon />} text={Locale.Home.WebSite} shadow/> */}
-              {/* </a> */}
-            {/* </div> */}
-          {/* </div> */}
-
-
-        </div>
-      </div>
-
-      <div className={styles["window-content"]}>
-        {openSettings ? (
-          <Settings
-            closeSettings={() => {
-              setOpenSettings(false);
-              setShowSideBar(true);
-            }}
-          />
-        ) : (
-          <Chat
-            key="chat"
-            showSideBar={() => setShowSideBar(true)}
-            sideBarShowing={showSideBar}
-          />
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }
 
+export function useLoadData() {
+  const config = useAppConfig();
+
+  var api: ClientApi;
+  if (config.modelConfig.model.startsWith("gemini")) {
+    api = new ClientApi(ModelProvider.GeminiPro);
+  } else if (identifyDefaultClaudeModel(config.modelConfig.model)) {
+    api = new ClientApi(ModelProvider.Claude);
+  } else {
+    api = new ClientApi(ModelProvider.GPT);
+  }
+  useEffect(() => {
+    (async () => {
+      const models = await api.llm.models();
+      config.mergeModels(models);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+}
+
 export function Home() {
+  useSwitchTheme();
+  useLoadData();
+  useHtmlLang();
+
+  useEffect(() => {
+    console.log("[Config] got config from build time", getClientConfig());
+    useAccessStore.getState().fetch();
+  }, []);
+
+  if (!useHasHydrated()) {
+    return <Loading />;
+  }
+
   return (
     <ErrorBoundary>
-      <_Home></_Home>
+      <Router>
+        <Screen />
+      </Router>
     </ErrorBoundary>
   );
 }
