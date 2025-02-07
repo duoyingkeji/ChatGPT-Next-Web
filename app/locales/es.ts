@@ -470,11 +470,6 @@ const es: PartialLocaleType = {
       SubTitle:
         "Cuanto mayor sea el valor, más probable es que se reduzcan las palabras repetidas",
     },
-    FrequencyPenalty: {
-      Title: "Penalización de frecuencia",
-      SubTitle:
-          "Un valor mayor que disminuye la probabilidad de repetir la misma línea",
-    },
   },
   Store: {
     DefaultTopic: "Nuevo chat",

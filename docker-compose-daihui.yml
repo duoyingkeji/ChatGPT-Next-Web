@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  chatgpt-next-web:
+    ports:
+      - "3333:3000"
+    environment:
+      # OpenAI的API KEY
+      - OPENAI_API_KEY=xxx
+      # 访问密码
+      - CODE=DuoYing2024
+      # 允许使用的模型
+      - CUSTOM_MODELS=-all,+gpt-3.5-turbo@OpenAI=gpt35,+gpt-4o-mini@OpenAI=gpt-4o-mini,+gpt-4o@OpenAI=gpt-4o,+deepseek-chat,+deepseek-reasoner,+deepseek-coder
+      # OpenAI的api地址或代理地址
+      - BASE_URL=https://openai.duoyingtech.com/openai
+      # deepseek
+      - DEEPSEEK_URL=https://api.deepseek.com
+      # deepseek api key
+      - DEEPSEEK_API_KEY=xxx
+    image: duoyingshuke/chatgpt-next-web:v1.1

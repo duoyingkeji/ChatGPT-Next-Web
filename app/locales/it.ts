@@ -471,11 +471,6 @@ const it: PartialLocaleType = {
       SubTitle:
         "Valore più alto, maggiore possibilità di ridurre le ripetizioni",
     },
-    FrequencyPenalty: {
-      Title: "Penalità di frequenza",
-      SubTitle:
-          "Un valore maggiore che diminuisce la probabilità di ripetere la stessa riga",
-    },
   },
   Store: {
     DefaultTopic: "Nuova chat",
